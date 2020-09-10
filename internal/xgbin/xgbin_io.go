@@ -248,7 +248,9 @@ func ReadGBTreeModel(reader *bufio.Reader) (*GBTreeModel, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	if gBTreeModel.Param.NumOutputGroup == 0 {
+		gBTreeModel.Param.NumOutputGroup = 1
+	}
 	for i := int32(0); i < gBTreeModel.Param.NumTrees; i++ {
 		tree, err := ReadTreeModel(reader)
 		if err != nil {
